@@ -1,0 +1,8 @@
+---
+spring:
+  profiles: default
+message: "Hello Docker, from local!"
+---
+spring:
+  profiles: production
+message: "Hello Docker, from prod!"

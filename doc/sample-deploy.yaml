@@ -1,0 +1,41 @@
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "sds-sb-docker"
+  namespace: "default"
+  labels:
+    app: "sds-sb-docker"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: "sds-sb-docker"
+  template:
+    metadata:
+      labels:
+        app: "sds-sb-docker"
+    spec:
+      containers:
+      - name: "sds-sb-docker-1"
+        image: "sdsani/sds-sb-docker"
+---
+apiVersion: "autoscaling/v2beta1"
+kind: "HorizontalPodAutoscaler"
+metadata:
+  name: "sds-sb-docker-hpa-aacc"
+  namespace: "default"
+  labels:
+    app: "sds-sb-docker"
+spec:
+  scaleTargetRef:
+    kind: "Deployment"
+    name: "sds-sb-docker"
+    apiVersion: "apps/v1"
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+  - type: "Resource"
+    resource:
+      name: "cpu"
+      targetAverageUtilization: 80
