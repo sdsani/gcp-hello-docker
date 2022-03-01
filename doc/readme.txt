@@ -1,10 +1,20 @@
-Tutorial followed here
-======================
+Spring boot guide
+=================
 https://spring.io/guides/gs/spring-boot-docker/
+https://spring.io/guides/topicals/spring-boot-docker/
+https://tomgregory.com/automating-docker-builds-with-gradle/
 
-Command to build the image
-==========================
-docker build --build-arg JAR_FILE=build/libs/*.jar -t sdsani/sds-sb-docker .
+https://docs.spring.io/spring-boot/docs/current/gradle-plugin/reference/htmlsingle/#build-image
+
+3 possible options for build
+============================
+1. Using spring boot plugin
+	gradlew bootBuildImage
+
+2. Using docker command (this would require Dockerfile) 
+	docker build -t sdsani/hello-docker .
+3. If you are running build and Jar separately (this would require Dockerfile also v2) 
+	docker build --build-arg JAR_FILE=build/libs/*.jar -t sdsani/sds-sb-docker .
 
 
 Run container

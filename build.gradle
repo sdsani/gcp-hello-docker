@@ -1,5 +1,5 @@
 plugins {
-	id 'org.springframework.boot' version '2.5.4'
+	id 'org.springframework.boot' version '2.6.3'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
 	id 'eclipse'
@@ -32,4 +32,20 @@ jar {
     // To build fat jar //
     enabled = false
     //classifier = ''
+}
+
+//image customization
+//https://docs.spring.io/spring-boot/docs/current/gradle-plugin/reference/htmlsingle/#build-image.examples
+//following params are defined in /.gradle/gradle.properties
+bootBuildImage {
+	imageName = "sdsani/${project.name}"
+	publish = true
+	docker {
+		publishRegistry {
+			username = "$githubusername"
+			password = "$githubpassword"
+			url = "$githuburl"
+			email = "$githubemail"
+		}
+	}
 }
