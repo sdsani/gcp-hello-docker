@@ -1,12 +1,24 @@
+#https://blog.devgenius.io/dockerizing-spring-app-with-gradle-3b6fbd650bf7
+#To use this file, use following command
+#gradlew clean build
+#docker image build -f Dockerfile_v0 -t sdsani/sds-sb-docker_v0 .
+
+#https://docs.docker.com/engine/reference/commandline/push/
+#docker push sdsani/sds-sb-docker_v0:latest
+#docker push docker.io/sdsani/sds-sb-docker_v0:latest
+
+#docker run -d -p 8080:8080 --name hello-doc-v0 sdsani/sds-sb-docker_v0
+
 FROM openjdk:11 AS build
-EXPOSE 8080
 
-RUN addgroup -S springboot && adduser -S springboot -G springboot
-USER springboot
+#No need for following. Get it done thru docker start command
+#EXPOSE 8080
 
-VOLUME /tmp
-ARG DEPENDENCY=target/dependency
-COPY ${DEPENDENCY}/BOOT-INF/lib /app/lib
-COPY ${DEPENDENCY}/META-INF /app/META-INF
-COPY ${DEPENDENCY}/BOOT-INF/classes /app
-ENTRYPOINT ["java","-cp","app:app/lib/*","com.example.hellodocker.HelloDockerApplication"]
+#Security layer
+RUN adduser --system --group springboot
+USER springboot:springboot
+
+ARG JAR_FILE=/build/libs/*.jar
+
+COPY ${JAR_FILE} app.jar 
+ENTRYPOINT ["java","-jar","app.jar"]

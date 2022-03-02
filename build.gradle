@@ -3,6 +3,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
 	id 'eclipse'
+	id 'idea'
 }
 
 group = 'com.example'
@@ -37,15 +38,17 @@ jar {
 //image customization
 //https://docs.spring.io/spring-boot/docs/current/gradle-plugin/reference/htmlsingle/#build-image.examples
 //following params are defined in /.gradle/gradle.properties
+//gradlew bootBuildImage
+//gradlew bootBuildImage --imageName=sdsani/hello-docker-v9 --publishImage
 bootBuildImage {
 	imageName = "sdsani/${project.name}"
-	publish = true
+	publish = false
 	docker {
 		publishRegistry {
-			username = "$githubusername"
-			password = "$githubpassword"
-			url = "$githuburl"
-			email = "$githubemail"
+			username = "$repousername"
+			password = "$repopassword"
+			url = "$repourl"
+			email = "$repoemail"
 		}
 	}
 }

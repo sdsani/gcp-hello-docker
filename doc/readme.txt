@@ -15,7 +15,11 @@ https://docs.spring.io/spring-boot/docs/current/gradle-plugin/reference/htmlsing
 	docker build -t sdsani/hello-docker .
 3. If you are running build and Jar separately (this would require Dockerfile also v2) 
 	docker build --build-arg JAR_FILE=build/libs/*.jar -t sdsani/sds-sb-docker .
+	docker build -f Dockerfile_v0 -t sdsani/sds-sb-docker .
 
+DockerFile bestPractce
+======================
+https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
 
 Run container
 =============
